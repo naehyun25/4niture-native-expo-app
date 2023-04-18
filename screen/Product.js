@@ -62,7 +62,7 @@ const Product = (props) => {
 const styles = StyleSheet.create({
     container :{
         flex:1,
-        backgroundColor:"#fff",
+        backgroundColor:"#ffffff",
     },
     productImage:{
         width:"100%",
