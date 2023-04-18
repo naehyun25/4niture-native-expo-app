@@ -4,7 +4,6 @@ import { API_URL } from "../config/constans";
 import axios from "axios";
 import dayjs from "dayjs";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
-
 const Product = (props) => {
     const {id} = props.route.params;
     const [product, setProduct] = useState(null);
@@ -24,11 +23,20 @@ const Product = (props) => {
     }
 
     const onPressButton=() => {
-        if(product.soldout !==1){
-        Alert.alert('구매가 완료되었습니다.')
-        }
+        axios
+      .post(`${API_URL}/purchase/${id}`)
+      .then((result) => {
+        message.info("결제가 완료 되었습니다");
+        getProduct();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+         if(product.soldout !==1){
+         Alert.alert('구매가 완료되었습니다.')
+         }
     };
-
+    const convertPrice = product.price.toLocaleString("ko-KR");
     return(
         <View Style={styles.container}>
         <ScrollView>
@@ -39,13 +47,13 @@ const Product = (props) => {
             <View style={styles.productSection}>
                 <View style={styles.productSeller}>
                     <Text style={styles.sellerText}>{product.seller}</Text>
-                    <Image style={styles.sellerAvatar} source={{uri:"https://cdn-icons-png.flaticon.com/512/10277/10277914.png"}}/>
+                    <Image style={styles.sellerAvatar} source={{uri:"https://cdn-icons-png.flaticon.com/512/10374/10374507.png"}}/>
                 </View>
                 <View style={styles.divider}></View>
                     <Text style={styles.productName}>{product.name}</Text>
-                    <Text style={styles.productPrice}>{product.price}</Text>
-                    <Text style={styles.productDate}>상품등록일:{dayjs(product.createdAt).format("YYYY년 MM월 DD일")}</Text>
-                    <Text style={styles.productDesc}>{product.description}</Text>
+                    <Text style={styles.productPrice}>{convertPrice}</Text>
+                    <Text style={styles.productDate}>카테고리:{product.category}</Text>
+                    <Text style={styles.productDesc}>{product.desc}</Text>
             </View>
         </ScrollView>
         {/* scrollView 안에있으면 스크롤에 따라 같이 넘어간다.
@@ -111,7 +119,7 @@ const styles = StyleSheet.create({
     },
     purchaseBtn:{
         position: "absolute",
-        bottom:0,
+        top:0,
         left:0,
         right:0,
         backgroundColor:"rgb(255,90,88)",
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     },
     purchaseDisabled:{
         position: "absolute",
-        bottom:0,
+        top:0,
         left:0,
         right:0,
         backgroundColor:"gray",

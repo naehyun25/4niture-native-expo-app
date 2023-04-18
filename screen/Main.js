@@ -5,17 +5,15 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, Dimensions, TouchableOpacity, Alert } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-
+import { useNavigation } from "@react-navigation/native";
 import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/ko";
-dayjs.locale("ko");
 
-dayjs.extend(relativeTime);
 
 export default function Main(props) {
 	const [products, setProducts] = useState([]);
 	const [banners, setBanners] = useState([]);
 	const PAGE_WIDTH = Dimensions.get("window").width;
+	const navigation = useNavigation();
 	const baseOptions = {
 		width: PAGE_WIDTH / 4,
 		height: 200,
@@ -23,6 +21,7 @@ export default function Main(props) {
 			width: PAGE_WIDTH,
 		},
 	};
+	
 	useEffect(() => {
 		axios
 			.get(`${API_URL}/products/`)
@@ -42,6 +41,11 @@ export default function Main(props) {
 				console.error(error);
 			});
 	}, []);
+	const moveTo = ()=>{
+		console.log("a")
+		
+	}
+	
 	return (
 		<View>
 			<StatusBar style="auto" />
@@ -55,6 +59,8 @@ export default function Main(props) {
              			 {...baseOptions}
              			 autoPlay={true}
              			 data={banners}
+						 width={Dimensions.get('window').width}
+						 height={180}
              			 renderItem={(banner) => {
                 return (
                     <Image source={{ uri: `${API_URL}/${banner.item.imgUrl}` }} style={styles.bannerImage} />
@@ -64,31 +70,36 @@ export default function Main(props) {
 					</TouchableOpacity>
 					<Text>Products</Text>
 					{products &&
-						products.map((product, index) => {
+						products.map((product, index) => { console.log(product)
 							return (
 								<TouchableOpacity  key={product.id} onPress={()=>{
 									props.navigation.navigate("Product",{id:product.id})}}>
 									<View style={styles.productCard}>
-										{product.soldout === 1 && <View style={styles.productBlur} />}
+										{product.soldout === 1 && <View style={styles.productBlur}><Text style={styles.soldoutText}>품절</Text></View>}
 										<View>
 											<Image source={{ uri: `${API_URL}/${product.imageUrl}` }} style={styles.productImage} resizeMode={"contain"} />
 										</View>
 										<View style={styles.productContent}>
 											<Text style={styles.productName}>{product.name}</Text>
-											<Text style={styles.productPrice}>{product.price}원</Text>
+											<Text style={styles.productPrice}>{ product.price.toLocaleString("ko-KR")}원</Text>
 										</View>
 										<View style={styles.productFooter}>
 											<View style={styles.productSeller}>
-												<Image source={{ uri: `https://cdn-icons-png.flaticon.com/512/10277/10277946.png` }} style={styles.productAvatar} />
+												<Image source={{ uri: `https://cdn-icons-png.flaticon.com/512/10374/10374507.png` }} style={styles.productAvatar} />
 												<Text style={styles.productSellerName}>{product.seller}</Text>
 											</View>
-											<Text style={styles.productDate}>{dayjs(product.createdAt).fromNow()}</Text>
+											<Text style={styles.productCate}>{product.category}</Text>
 										</View>
 									</View>
 								</TouchableOpacity>
 							);
 						})}
 				</View>
+				<TouchableOpacity onPress={()=>{props.navigation.navigate("Review")}}>
+					<View>
+						<Text style={styles.reviewTab}>Review</Text>
+					</View>
+				</TouchableOpacity>
 			</ScrollView>
 		</View>
 	);
@@ -140,7 +151,7 @@ const styles = StyleSheet.create({
 	productSellerName: {
 		fontSize: 16,
 	},
-	productDate: {
+	productCate: {
 		fontSize: 16,
 	},
 	productBlur: {
@@ -157,9 +168,14 @@ const styles = StyleSheet.create({
 		height: "100%",
 		resizeMode: "contain",
 	  },
-	  banners: {
-		width: "100%",
-		position: "relative",
-		height: 700,
-	  },
+	soldoutText :{
+		textAlign:"center",
+		fontSize:20,
+		lineHeight:380,
+	},
+	reviewTab:{
+		fontSize:20,
+		backgroundColor:"#F25A29",
+		color:"#eee"
+	}
 });
