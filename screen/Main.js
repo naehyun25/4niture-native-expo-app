@@ -1,12 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { API_URL } from "../config/constans";
 import axios from "axios";
-import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, Dimensions, TouchableOpacity, Alert } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import { useNavigation } from "@react-navigation/native";
-import relativeTime from "dayjs/plugin/relativeTime";
 
 
 export default function Main(props) {
