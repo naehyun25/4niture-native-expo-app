@@ -2,11 +2,10 @@
 
 ## 구현화면
 
-<img height="350px" src="https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/project4-test.gif" alt="portfolio mobile demo gif"/>
+<img width="350px" src="https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/project4-test.gif"style="max-width: 100%; display: inline-block;" alt="portfolio mobile demo gif"data-target="animated-image.originalLink"/>
 
 ## 배포주소
-1. 🚀apk :[https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets
-/4nitureapp.apk](apk다운로드)
+1. 🚀apk :[https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/4nitureapp.apk](apk다운로드)
 2. 🏢서버 호스팅 주소: [https://port-0-reactbackserver-1093j2alg7w4myv.sel3.cloudtype.app/](https://port-0-reactbackserver-1093j2alg7w4myv.sel3.cloudtype.app/)
 
 ## 목차
