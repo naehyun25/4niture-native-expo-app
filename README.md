@@ -1,7 +1,7 @@
 # 4NITURE REACT-NATIVE-EXPO APP
 
 ## 구현화면
-<img height="350px" src="https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/project4-test.gif" alt="appdemo"/>
+<img height="350px" src="https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/project4.png" alt="appdemo"/>
 
 ## 배포주소
 1. 🚀apk :[https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/4nitureapp.apk](apk다운로드)
