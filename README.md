@@ -1,6 +1,7 @@
 # 4NITURE REACT-NATIVE-EXPO APP
 
 ## 구현화면
+<img src="https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/project4-test.gif"/>
 ![](https://github.com/naehyun25/4niture-native-expo-app/tree/main/assets/project4-test.gif)
 
 ## 배포주소
