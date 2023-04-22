@@ -8,7 +8,6 @@ import Review from "./screen/Review";
 
 const Stack = createNativeStackNavigator();
 
-console.log(Stack)
 export default function App() {
 	return (
 		<SafeAreaView style={styles.safeView}>
